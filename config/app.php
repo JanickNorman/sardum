@@ -136,6 +136,8 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Laravel\Socialite\SocialiteServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
+		'Conner\Likeable\LikeableServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -194,7 +196,8 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Socialize'	=> 'Laravel\Socialite\Facades\Socialite',
-
+		'HTML' 		=> 'Illuminate\Html\HtmlFacade',
+		'Form'		=>	'Illuminate\Html\FormFacade',
 	],
 
 ];

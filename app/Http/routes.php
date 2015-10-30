@@ -23,7 +23,11 @@
 
 
 Route::get('login/{provider?}', 'Auth\AuthController@login');
-Route::get('register', 'Auth\AuthController@register');
+Route::get('register', 'Auth\AuthController@getRegister');
+Route::post('register', 'Auth\AuthController@postRegister');
+Route::get('twitter/login', 'Auth\AuthController@twitterLogin');
+Route::get('twitter/callback', 'Auth\AuthController@twitterCallback');
+
 
 Route::get('/', 'SiteController@index');
 Route::get('gallery/{id}', 'SiteController@photo');
@@ -31,6 +35,7 @@ Route::get('gallery/{id}', 'SiteController@photo');
 Route::get('gallery', function() {
 	return redirect('/');
 });
+
 
 // Route::get('twitter', 'TwitterController@redirectToProvider');
 // Route::get('twitter/callback', 'TwitterController@handleProviderCallback');

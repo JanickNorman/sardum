@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a666ff3014d33eee3cd69f7e8c2e6d76",
-    "content-hash": "cd73db07171a83d46fad54fdf6d288eb",
+    "hash": "e509d2458d66910edb817be920a4e14d",
+    "content-hash": "db240d3cbfbb148428d7635c14cde6f6",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -535,6 +535,52 @@
             "time": "2015-08-15 19:32:36"
         },
         {
+            "name": "illuminate/html",
+            "version": "v5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/html.git",
+                "reference": "3d1009bb8e0f25720c914af5c1f4015dd373c9ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/html/zipball/3d1009bb8e0f25720c914af5c1f4015dd373c9ef",
+                "reference": "3d1009bb8e0f25720c914af5c1f4015dd373c9ef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/http": "~5.0",
+                "illuminate/session": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Html\\": ""
+                },
+                "files": [
+                    "helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "time": "2015-01-01 16:31:18"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "v1.0.4",
             "source": {
@@ -987,16 +1033,16 @@
         },
         {
             "name": "league/oauth1-client",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth1-client.git",
-                "reference": "4d4edd9b6014f882e319231a9b3351e3a1dfdc81"
+                "reference": "cef3ceda13c78f89c323e4d5e6301c0eb7cea422"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/4d4edd9b6014f882e319231a9b3351e3a1dfdc81",
-                "reference": "4d4edd9b6014f882e319231a9b3351e3a1dfdc81",
+                "url": "https://api.github.com/repos/thephpleague/oauth1-client/zipball/cef3ceda13c78f89c323e4d5e6301c0eb7cea422",
+                "reference": "cef3ceda13c78f89c323e4d5e6301c0eb7cea422",
                 "shasum": ""
             },
             "require": {
@@ -1046,7 +1092,7 @@
                 "tumblr",
                 "twitter"
             ],
-            "time": "2015-08-22 09:49:14"
+            "time": "2015-10-23 04:02:07"
         },
         {
             "name": "monolog/monolog",
@@ -1420,6 +1466,61 @@
             "time": "2015-03-26 18:43:54"
         },
         {
+            "name": "rtconner/laravel-likeable",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rtconner/laravel-likeable.git",
+                "reference": "48c949a5e4e431ad8e199f229ddc359c33cdd214"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rtconner/laravel-likeable/zipball/48c949a5e4e431ad8e199f229ddc359c33cdd214",
+                "reference": "48c949a5e4e431ad8e199f229ddc359c33cdd214",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Conner\\Likeable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Conner",
+                    "email": "rtconner@smarter.bz"
+                }
+            ],
+            "description": "Trait for Laravel Eloquent models to allow easy implementation of a 'like' or 'favorite' or 'remember' feature.",
+            "homepage": "https://smartersoftware.net/packages/laravel-likeable-favorite",
+            "keywords": [
+                "Follow",
+                "eloquent",
+                "favorite",
+                "favourite",
+                "laravel",
+                "likable",
+                "like",
+                "likeable",
+                "remember",
+                "trait"
+            ],
+            "time": "2015-05-29 22:53:10"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.1",
             "source": {
@@ -1593,16 +1694,16 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
-                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/87a5db5ea887763fa3a31a5471b512ff1596d9b8",
+                "reference": "87a5db5ea887763fa3a31a5471b512ff1596d9b8",
                 "shasum": ""
             },
             "require": {
@@ -1613,7 +1714,6 @@
                 "symfony/config": "~2.0,>=2.0.5",
                 "symfony/dependency-injection": "~2.6",
                 "symfony/expression-language": "~2.6",
-                "symfony/phpunit-bridge": "~2.7",
                 "symfony/stopwatch": "~2.3"
             },
             "suggest": {
@@ -1647,27 +1747,24 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-22 13:49:29"
+            "time": "2015-10-11 09:39:48"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "a17f8a17c20e8614c15b8e116e2f4bcde102cfab"
+                "reference": "56fd6df73be859323ff97418d97edc1d756df6df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a17f8a17c20e8614c15b8e116e2f4bcde102cfab",
-                "reference": "a17f8a17c20e8614c15b8e116e2f4bcde102cfab",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/56fd6df73be859323ff97418d97edc1d756df6df",
+                "reference": "56fd6df73be859323ff97418d97edc1d756df6df",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -1696,7 +1793,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-09 17:42:36"
+            "time": "2015-10-18 20:23:18"
         },
         {
             "name": "symfony/finder",
@@ -1747,76 +1844,6 @@
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
             "time": "2015-07-09 16:02:48"
-        },
-        {
-            "name": "symfony/form",
-            "version": "v2.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/form.git",
-                "reference": "d4a990d2ebe4dd39cac52c5a40a5aac84b12b237"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/d4a990d2ebe4dd39cac52c5a40a5aac84b12b237",
-                "reference": "d4a990d2ebe4dd39cac52c5a40a5aac84b12b237",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9",
-                "symfony/event-dispatcher": "~2.1",
-                "symfony/intl": "~2.4",
-                "symfony/options-resolver": "~2.6",
-                "symfony/property-access": "~2.3"
-            },
-            "conflict": {
-                "symfony/doctrine-bridge": "<2.7",
-                "symfony/framework-bundle": "<2.7",
-                "symfony/twig-bridge": "<2.7"
-            },
-            "require-dev": {
-                "doctrine/collections": "~1.0",
-                "symfony/http-foundation": "~2.2",
-                "symfony/http-kernel": "~2.4",
-                "symfony/phpunit-bridge": "~2.7",
-                "symfony/security-csrf": "~2.4",
-                "symfony/translation": "~2.0,>=2.0.5",
-                "symfony/validator": "~2.6,>=2.6.8"
-            },
-            "suggest": {
-                "symfony/framework-bundle": "For templating with PHP.",
-                "symfony/security-csrf": "For protecting forms against CSRF attacks.",
-                "symfony/twig-bridge": "For templating with Twig.",
-                "symfony/validator": "For form validation."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Form\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Form Component",
-            "homepage": "https://symfony.com",
-            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/http-foundation",
@@ -1951,135 +1978,6 @@
             "time": "2015-07-26 10:44:22"
         },
         {
-            "name": "symfony/intl",
-            "version": "v2.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/intl.git",
-                "reference": "35f902b232c10056e17d94a842160d44bb540838"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/35f902b232c10056e17d94a842160d44bb540838",
-                "reference": "35f902b232c10056e17d94a842160d44bb540838",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/filesystem": "~2.1",
-                "symfony/phpunit-bridge": "~2.7"
-            },
-            "suggest": {
-                "ext-intl": "to use the component with locales other than \"en\""
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Intl\\": ""
-                },
-                "classmap": [
-                    "Resources/stubs"
-                ],
-                "files": [
-                    "Resources/stubs/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bernhard Schussek",
-                    "email": "bschussek@gmail.com"
-                },
-                {
-                    "name": "Eriksen Costa",
-                    "email": "eriksen.costa@infranology.com.br"
-                },
-                {
-                    "name": "Igor Wiedler",
-                    "email": "igor@wiedler.ch"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "A PHP replacement layer for the C intl extension that includes additional data from the ICU library.",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "i18n",
-                "icu",
-                "internationalization",
-                "intl",
-                "l10n",
-                "localization"
-            ],
-            "time": "2015-09-09 17:53:06"
-        },
-        {
-            "name": "symfony/options-resolver",
-            "version": "v2.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "75389f6f948edfdf0c0ebdbe00c4f84ab5d1a03e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/75389f6f948edfdf0c0ebdbe00c4f84ab5d1a03e",
-                "reference": "75389f6f948edfdf0c0ebdbe00c4f84ab5d1a03e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\OptionsResolver\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony OptionsResolver Component",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "config",
-                "configuration",
-                "options"
-            ],
-            "time": "2015-09-25 06:59:16"
-        },
-        {
             "name": "symfony/process",
             "version": "v2.6.11",
             "target-dir": "Symfony/Component/Process",
@@ -2128,66 +2026,6 @@
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
             "time": "2015-06-30 16:10:16"
-        },
-        {
-            "name": "symfony/property-access",
-            "version": "v2.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/property-access.git",
-                "reference": "f8ea7aa472f0e3f8cdf43287caa72a70ff5c088c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/f8ea7aa472f0e3f8cdf43287caa72a70ff5c088c",
-                "reference": "f8ea7aa472f0e3f8cdf43287caa72a70ff5c088c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\PropertyAccess\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony PropertyAccess Component",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "access",
-                "array",
-                "extraction",
-                "index",
-                "injection",
-                "object",
-                "property",
-                "property path",
-                "reflection"
-            ],
-            "time": "2015-08-24 07:13:45"
         },
         {
             "name": "symfony/routing",
@@ -3005,16 +2843,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.15",
+            "version": "4.8.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "be8f7b9eacf8243940f8412f8b4a9a434c73dd7b"
+                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/be8f7b9eacf8243940f8412f8b4a9a434c73dd7b",
-                "reference": "be8f7b9eacf8243940f8412f8b4a9a434c73dd7b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/625f8c345606ed0f3a141dfb88f4116f0e22978e",
+                "reference": "625f8c345606ed0f3a141dfb88f4116f0e22978e",
                 "shasum": ""
             },
             "require": {
@@ -3073,7 +2911,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-22 09:05:37"
+            "time": "2015-10-23 06:48:33"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3504,23 +3342,20 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.5",
+            "version": "v2.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770"
+                "reference": "eca9019c88fbe250164affd107bc8057771f3f4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
-                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/eca9019c88fbe250164affd107bc8057771f3f4d",
+                "reference": "eca9019c88fbe250164affd107bc8057771f3f4d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
             },
             "type": "library",
             "extra": {
@@ -3549,7 +3384,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-14 14:14:09"
+            "time": "2015-10-11 09:39:48"
         }
     ],
     "aliases": [],

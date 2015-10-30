@@ -6,9 +6,12 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use \Socialize as Socialize;
 use \Input as Input;
+use \App\User as User;
+use \Form as Form;
 
 use App\AuthenticateUser;
 use Illuminate\Http\Request;
+use App\DateHelper;
 
 class AuthController extends Controller {
 
@@ -36,23 +39,48 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-
 		//$this->middleware('guest', ['except' => 'getLogout']);
+}
+	
+
+	public function twitterLogin() {
+		return Socialize::driver('twitter')->redirect();
 	}
 
-	public function register() {
+	public function twitterCallback() {
 
+		try {
+			$user = Socialize::driver('twitter')->user();
+
+			//kalo user udah daftar, coba login
+			if ($this->auth->attempt([
+					'provider' => 'tw',
+					'provider_id' => $user->id
+				])) 
+			{
+
+				return redirect('/')->withSuccess("Welcome");
+
+			} else {
+				session(['nama' => $user->name,
+						'provider' => 'tw',
+						'provider_id' => $user->id]);
+			
+				return redirect()->action('Auth\AuthController@getRegister');	
+			}
+
+		} catch (\Exception $e) {
+			return redirect('/');
+		}
+	}
+
+	public function getRegister(DateHelper $dateHelper) {
 		return view('register');
 	}
 
-    public function login(AuthenticateUser $authenticateUser, Request $request, $provider = null) {
-       return $authenticateUser->execute($request->all(), $this, $provider);
-    }
 
-    //listener
-	public function userHasLoggedIn($user) {
-    	\Session::flash('message', 'Welcome, ' . $user->username);
+	public function postRegister(Request $request) {
 
-    	return redirect('/');
 	}
+
 }

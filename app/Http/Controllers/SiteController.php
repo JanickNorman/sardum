@@ -7,15 +7,30 @@ use Illuminate\Http\Request;
 
 class SiteController extends Controller {
 
-	
-	public function index() {
+	public function __construct() {
+		
+	}
 
-		return view('index');
+	public function index() {
+		$data['tes'] = "haia";
+		return view('index')->with($data, 'data');
 	}
 
 	public function photo($id) {
-
+		
 		return view('photo');
+	}
+
+	public function likePhoto() {
+
+		$photo = Photo::findOrFail($id);
+		if (! $photo->liked($myUserId)) {
+
+			$photo->unlike();
+		}else {
+
+			$photo->like();
+		}
 	}
 
 }

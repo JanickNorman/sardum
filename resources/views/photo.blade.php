@@ -1,24 +1,34 @@
 @extends('main')
 
+@section('header')
+	@include('_partial/header')
+@endsection
+
 @section('content')
 	<div class="container">
-		<div>
-					<h5>Back to gallery</h5>
-		<h3>Gallery Sardumoment</h3>
+		<div class="row">
+			<h5>Back to gallery</h5>
+			<h3>Gallery Sardumoment</h3>
 		</div>
 		<div class="row" style="background-color: #ddd">
-			<div class="col-lg-12">
-                <img class="img-responsive center-block" src="http://placehold.it/500x320.jpg" alt="">
-			</div>
+	        <div class="media-body text-center center-block">
+				<div class="row" style="margin: 0 auto; display: inline-block">
+					<img class="img-responsive" src="http://placehold.it/500x320.jpg" alt="">
+					<br>
+					<div class="row text-right">
+					    <a href="#" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> likes</a>	
+					</div>
+				</div>
+	        </div>
 		</div>
-		<div class="row" style="background-color: #ddd">
+    	<div class="row">
 			<div class="col-md-4">
 	              <div class="thumbnail">
 				      <img src="..." alt="...">
 				      <div class="caption">
-				        <h5>Jon Jackson Kusumawardana</h5>
+				        <h5>{{Auth::check() ? Auth::user()->name : "Jon Jackson"}}</h5>
 				        <p>...</p>
-				      </div>
+				      </div>s
 			    </div>
 			</div>
 			<div class="col-md-8">
@@ -31,10 +41,19 @@
 				<strong>SHARE KE TEMANMU</strong>
 			</div>
 		</div>
-		<div class="row">
-
-		</div>
 	</div>
 
-
 @endsection
+
+@section('footer')
+	@include('_partial/footer')
+@endsection
+
+<script>
+	//click button
+
+	//if photo hasn't been liked
+		//like
+	//else
+		//unlike
+</script>

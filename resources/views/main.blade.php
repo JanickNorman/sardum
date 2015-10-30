@@ -6,11 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	{!! HTML::style('css/app.css') !!}
+	{!! HTML::style('css/font-awesome.min.css')!!}
+	{!! HTML::style('css/bootstrap-social.css') !!}
 
 	<!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
+	{!! HTML::style('//fonts.googleapis.com/css?family=Roboto:400,300') !!}
+	@yield('head')
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -19,16 +21,18 @@
 	<![endif]-->
 </head>
 <body>
-	@include('_partial/header')
-
+	@yield('header')
 
 	@yield('content')
 
+	@yield('section')
+	
+	@yield('footer')
 
 
-	@include('_partial/footer')
 	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	{!! HTML::script('js/jquery.min.js')!!}
+	{!! HTML::script('js/bootstrap.min.js') !!}
+	@yield('bottom')
 </body>
 </html>

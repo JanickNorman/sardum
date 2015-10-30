@@ -1,5 +1,7 @@
 @extends('main')
-
+@section('header')
+	@include('_partial/header')
+@endsection
 
 @section('content')
 	<div class="container">
@@ -45,4 +47,6 @@
 
 @endsection
 
- 
+@section('footer')
+	@include('_partial/footer')
+@endsection
