@@ -2,31 +2,43 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use \Input as Input;
+use \Auth as Auth;
+use App\Photo;
+use App\Like;
 
 use Illuminate\Http\Request;
 
 class LikesController extends Controller {
 
+	public function likePhoto(Request $request) {
 
-	private $currentId;
-	public function __construct() {
+		$like = new Like;
 
-		$this->currentId = Auth::user->id;
-	}
+		$user = Auth::user();
+		$id = Input::only('photo_id');
 
-	public function likeArticle(Article $article) {
+		$like->user_id = $user->id;
+		$like->photo_id = $id;
+		
+		$like->save();
 
-		if (! $article->liked()) {
-			$article->like();
-		}else {
-			$article->
-		}
-
+		//response angka
+		return response()->json(['status' => 'success']);
 	}	
+
+	public function unlikePhoto() {
+
+	    $user = Auth::user();
+	    $id = Input::only('photo_id');
+
+	    $like = Like::findOrFail($id);
+
+	    $like->where('user_id', $user->id)->where('photo_id', $id)->firstOrFail()->delete();
+	    
+		return response()->json(['status' => 'success']);
+
+	}
 
 }
 
-//if model hasn't been liked
-	//like
-//else
-	//unlike

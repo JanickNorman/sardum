@@ -6,8 +6,10 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use \Socialize as Socialize;
 use \Input as Input;
-use \App\User as User;
+use \App\User;
 use \Form as Form;
+use \Auth as Auth;
+use \Session as Session;
 
 use App\AuthenticateUser;
 use Illuminate\Http\Request;
@@ -39,48 +41,67 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-		//$this->middleware('guest', ['except' => 'getLogout']);
 }
 	
 
-	public function twitterLogin() {
+	public function loginTwitter() {
 		return Socialize::driver('twitter')->redirect();
 	}
 
-	public function twitterCallback() {
+	public function callbackTwitter() {
 
 		try {
 			$user = Socialize::driver('twitter')->user();
 
-			//kalo user udah daftar, coba login
-			if ($this->auth->attempt([
-					'provider' => 'tw',
-					'provider_id' => $user->id
-				])) 
-			{
+			//tambah data rekomendasi di default form nya
+			Session::put(['nama' => $user->name,
+					'provider_type' => 'tw',
+					'provider_id' => $user->id,
+					'avatar' => $user->avatar]);
 
-				return redirect('/')->withSuccess("Welcome");
-
-			} else {
-				session(['nama' => $user->name,
-						'provider' => 'tw',
-						'provider_id' => $user->id]);
-			
-				return redirect()->action('Auth\AuthController@getRegister');	
-			}
-
+			return redirect()->route('get.register');	
 		} catch (\Exception $e) {
-			return redirect('/');
+			return redirect('/')->route('home');
 		}
 	}
 
+	/*
+	*
+	* DateHelper logic dari form datenya, supaya ngga ada 31 February
+	*
+	*/
 	public function getRegister(DateHelper $dateHelper) {
 		return view('register');
 	}
 
 
 	public function postRegister(Request $request) {
+		$input = $request->except('_token');
 
+		if (Session::has('provider_id') && Session::has('provider_type') && Session::has('avatar')) {
+			
+			$data = [
+				'provider_type' => Session::get('provider_type'),
+				'provider_id' => Session::get('provider_id'),
+				'nama' => $input['nama'],
+				'avatar' => Session::get('avatar'),
+				'email' => $input['email'],
+				'tanggal_lahir' => $input['tanggal_lahir']['day'],
+				'alamat' => $input['alamat'],
+				'nomer_handphone' => $input['nomer_handphone']
+			];
+			$validator = $this->registrar->validator($data);
+			if (!$validator->fails()) {
+
+				return redirect()->route('home');
+			}
+			$user = $this->registrar->create($data);
+			Auth::login($user);
+
+			return redirect('/');
+		}
+
+		return redirect()->route('get.register')->withMessage('please choose login provider');
 	}
 
 }

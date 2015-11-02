@@ -37,7 +37,7 @@ return [
 	'twitter' => [
 		'client_id' => 'RndUCaygvI0zETsWqEpLteglT',
 		'client_secret' => 'BWJ2nxUZS0gRS4mBmE9DClXRcW3n9fL4jajw48o15r917z7zyT',
-		'redirect' => 'http://sardumoment.dev:8000/twitter/callback',
+		'redirect' => 'http://sardumoment.dev:8000/callback/twitter',
 	],
 
 ];

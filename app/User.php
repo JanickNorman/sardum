@@ -22,7 +22,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['nama', 'email', 'nomer_handphone', 'alamat', 'tanggal_lahir'];
+	protected $fillable = ['provider_id', 
+	'provider_type', 'nama', 'avatar', 'email', 'tanggal_lahir', 'alamat', 'nomer_handphone'];
+
+
+	protected $guard = ['remember_token'];
+
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -35,5 +40,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function photos() {
 		return $this->hasMany('App\Photo');
 	}
+
+	public function likes() {
+		return $this->hasMany('App\Like');
+	}
+
+
 
 }

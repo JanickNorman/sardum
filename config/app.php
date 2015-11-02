@@ -138,6 +138,7 @@ return [
 		'Laravel\Socialite\SocialiteServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		'Conner\Likeable\LikeableServiceProvider',
+		'Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider',
 
 		/*
 		 * Application Service Providers...

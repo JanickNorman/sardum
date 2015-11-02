@@ -11,34 +11,37 @@
 |
 */
 
-//Route::get('/', 'WelcomeController@index');
 
-// Route::get('home', 'HomeController@index');
-
-
-// Route::controllers([
-// 	'auth' => 'Auth\AuthController',
-// 	'password' => 'Auth\PasswordController'
-// ]);
-
-
-Route::get('login/{provider?}', 'Auth\AuthController@login');
-Route::get('register', 'Auth\AuthController@getRegister');
-Route::post('register', 'Auth\AuthController@postRegister');
-Route::get('twitter/login', 'Auth\AuthController@twitterLogin');
-Route::get('twitter/callback', 'Auth\AuthController@twitterCallback');
+Route::get('login/twitter', [
+	'as' => 'login.twitter',
+	'uses' =>'Auth\AuthController@loginTwitter'
+	]);
+Route::get('callback/twitter', 'Auth\AuthController@callbackTwitter');
+Route::get('/register', [
+	'as' => 'get.register',
+	'uses' => 'Auth\AuthController@getRegister']);
+Route::post('register', [
+	'as' => 'post.register',
+	'uses' => 'Auth\AuthController@postRegister']);
 
 
-Route::get('/', 'SiteController@index');
-Route::get('gallery/{id}', 'SiteController@photo');
-//sekedar redirect
-Route::get('gallery', function() {
-	return redirect('/');
-});
+
+Route::get('/', [
+	'as' => 'home',
+	'uses' => 'SiteController@index']);
+Route::get('/photo/{id}', [
+	'as' => 'show.photo',
+	'uses' => 'SiteController@showPhoto']);
+Route::post('photo/upload', [
+	'as' => 'upload.photo',
+	'uses' => 'SiteController@uploadPhoto']);
 
 
-// Route::get('twitter', 'TwitterController@redirectToProvider');
-// Route::get('twitter/callback', 'TwitterController@handleProviderCallback');
 
-
+Route::post('/like/photo', [
+		'as' => 'like.photo',
+		'uses' => 'LikesController@likePhoto']);
+Route::post('/unlike/photo', [
+		'as' => 'unlike.photo',
+		'uses' => 'LikesController@unlikePhoto']);
 

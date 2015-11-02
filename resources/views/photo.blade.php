@@ -16,7 +16,10 @@
 					<img class="img-responsive" src="http://placehold.it/500x320.jpg" alt="">
 					<br>
 					<div class="row text-right">
-					    <a href="#" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> likes</a>	
+						<span>
+							<a class="like-button">Like<a>
+						</span>
+					    <!-- <a id="" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> likes</a> !-->
 					</div>
 				</div>
 	        </div>
@@ -49,11 +52,44 @@
 	@include('_partial/footer')
 @endsection
 
-<script>
-	//click button
+@section('bottom')
+	<script>
+		$(function() {
+		    $('.like-button').click(function(){
+		    	console.log('haha');
 
-	//if photo hasn't been liked
-		//like
-	//else
-		//unlike
-</script>
+
+		        var obj = $(this);
+		        if( obj.data('liked') ){
+			    	$.ajax({
+			    		type: "POST",
+			    		url: '/unlike/photo',
+			    		data: {
+			    			photo_id: 3
+			    		},
+			    		success: function(data) {
+			    			console.log(data);
+			    		}
+			    	})
+
+		            obj.data('liked', false);
+		            obj.html('Like');
+		        }
+		        else{
+			    	$.ajax({
+			    		type: "POST",
+			    		url: '/like/photo',
+			    		data: {
+			    			photo_id: 3
+			    		},
+			    		success: function(data) {
+			    			console.log(data);
+			    		}
+			    	})
+		            obj.data('liked', true);
+		            obj.html('Unlike');
+		        }
+		    });
+		});
+	</script>
+@endsection

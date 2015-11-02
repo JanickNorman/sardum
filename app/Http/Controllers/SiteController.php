@@ -16,21 +16,12 @@ class SiteController extends Controller {
 		return view('index')->with($data, 'data');
 	}
 
-	public function photo($id) {
-		
+	public function showPhoto($id) {
 		return view('photo');
 	}
 
-	public function likePhoto() {
-
-		$photo = Photo::findOrFail($id);
-		if (! $photo->liked($myUserId)) {
-
-			$photo->unlike();
-		}else {
-
-			$photo->like();
-		}
+	public function uploadPhoto(Request $request) {
+		dd(\Input::hasFile('photo'));
 	}
 
 }

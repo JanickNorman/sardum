@@ -16,8 +16,8 @@
 			<div class="row">
 				<div class="col-md-6">
 					<label for="nama">Nama</label><br>
-					@if (Session::has('social_name'))
-						<input style="width: 100%" name="nama" value="{{Session::get('social_name')}}">
+					@if (Session::has('nama'))
+						<input style="width: 100%" name="nama" value="{{Session::get('nama')}}">
 					@else
 						<input id="nama" name="nama" style="width: 100%" type="text">				
 					@endif
@@ -32,12 +32,12 @@
 					<label for="tanggal_lahir">Tanggal Lahir</label>
 					<br>
 					<div class="input-group date">
-						{!! Form::datetime('event_date') !!}
+						{!! Form::datetime('tanggal_lahir') !!}
 					</div>	
 				</div>
 				<div class="col-md-6">
 					<label for="nomer_handphone">Nomer Handphone</label><br>
-					<input id="nomer_handphone" nama="nomer_handphone" style="width: 100%" type="text">
+					<input id="nomer_handphone" name="nomer_handphone" style="width: 100%" type="text">
 				</div>
 			</div>
 			<div class="row">
