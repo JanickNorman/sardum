@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('login/twitter', [
 	'as' => 'login.twitter',
 	'uses' =>'Auth\AuthController@loginTwitter'
@@ -37,11 +36,10 @@ Route::post('photo/upload', [
 	'uses' => 'SiteController@uploadPhoto']);
 
 
-
-Route::post('/like/photo', [
+Route::post('like/photo', [
 		'as' => 'like.photo',
 		'uses' => 'LikesController@likePhoto']);
-Route::post('/unlike/photo', [
+Route::post('unlike/photo', [
 		'as' => 'unlike.photo',
 		'uses' => 'LikesController@unlikePhoto']);
 

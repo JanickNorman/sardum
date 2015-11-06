@@ -9,7 +9,6 @@ class Like extends Model {
 	protected $fillable = ['user_id', 'photo_id'];
 
 	public function owner() {
-
 		return $this->belongsTo('App\User', 'user_id');
 	}
 

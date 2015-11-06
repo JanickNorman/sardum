@@ -32,7 +32,27 @@
 					<label for="tanggal_lahir">Tanggal Lahir</label>
 					<br>
 					<div class="input-group date">
-						{!! Form::datetime('tanggal_lahir') !!}
+						<select name="day">
+						    <?php
+						        foreach ($date['days'] as $value => $day) {
+						            printf('<option value="%u">%s</option>', $value, $day);
+						        }
+						    ?>
+						</select>
+						<select name="month">
+						    <?php
+						        foreach ($date['months'] as $value => $month) {
+						            printf('<option value="%u">%s</option>', $value, $month);
+						        }
+						    ?>
+						</select>
+						<select name="year">
+						    <?php
+						        foreach ($date['years'] as $value => $year) {
+						            printf('<option value="%u">%s</option>', $value, $year);
+						        }
+						    ?>
+						</select>
 					</div>	
 				</div>
 				<div class="col-md-6">

@@ -13,11 +13,14 @@
 		<div class="row" style="background-color: #ddd">
 	        <div class="media-body text-center center-block">
 				<div class="row" style="margin: 0 auto; display: inline-block">
-					<img class="img-responsive" src="http://placehold.it/500x320.jpg" alt="">
+					<img class="img-responsive" src="{{$data['image']}}" alt="">
 					<br>
 					<div class="row text-right">
+						<div>
+							<span class="like">{{$data['totalLikes']}}</span>
+						</div>
 						<span>
-							<a class="like-button">Like<a>
+							<a class="btn btn-sm btn-default like-button" data-photoid={{$data['photo_id']}}>like</a>
 						</span>
 					    <!-- <a id="" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-thumbs-up"></span> likes</a> !-->
 					</div>
@@ -27,15 +30,15 @@
     	<div class="row">
 			<div class="col-md-4">
 	              <div class="thumbnail">
-				      <img src="..." alt="...">
+				      <img src="{{$data['avatar_uploader']}}" alt="...">
 				      <div class="caption">
-				        <h5>{{Auth::check() ? Auth::user()->name : "Jon Jackson"}}</h5>
-				        <p>...</p>
-				      </div>s
+				        <h5>{{$data['nama_uploader']}}</h5>
+				        <h6><a href="#">view all posts</a></h6>
+				      </div>
 			    </div>
 			</div>
 			<div class="col-md-8">
-				<p>Pernah terlintas, bagaimana susuh dan sulitna untuk berangkat ke sekolah? mungkin sebagian anak dan orang dewasa tidak pernah membayangkan, apalagi mengalaminya. Tetapi yakinlah , sebagian beasar anak Indonesia masih banyak yang mengalami. Yaitu bagaimana sulitnya untuk berangkat menuiju ke tempat mereka belajar, yaitu sekolah.</p>
+				<p>{{$data['deskripsi']}}</p>
 			</div>
 		</div>
 		<div class="row" style="background-color: #ddd">
@@ -54,40 +57,41 @@
 
 @section('bottom')
 	<script>
+
+		$.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        }
+		    });
+
 		$(function() {
 		    $('.like-button').click(function(){
-		    	console.log('haha');
-
-
 		        var obj = $(this);
+		        console.log("HAHAA");
 		        if( obj.data('liked') ){
 			    	$.ajax({
 			    		type: "POST",
-			    		url: '/unlike/photo',
-			    		data: {
-			    			photo_id: 3
-			    		},
+			    		url: "/unlike/photo",
+			    		data: "photo_id=" + obj.data('photoid'),
 			    		success: function(data) {
 			    			console.log(data);
-			    		}
+			    			console.log(data.totalLikes);
+		            		obj.data('liked', false);
+		            		obj.html('Like');
+			    		},
 			    	})
 
-		            obj.data('liked', false);
-		            obj.html('Like');
-		        }
-		        else{
+		        } else {
 			    	$.ajax({
 			    		type: "POST",
-			    		url: '/like/photo',
-			    		data: {
-			    			photo_id: 3
-			    		},
+			    		url: "/like/photo",
+			    		data: "photo_id=" + obj.data('photoid'),
 			    		success: function(data) {
 			    			console.log(data);
+				            obj.data('liked', true);
+				            obj.html('Unlike');
 			    		}
 			    	})
-		            obj.data('liked', true);
-		            obj.html('Unlike');
 		        }
 		    });
 		});

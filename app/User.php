@@ -28,6 +28,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	protected $guard = ['remember_token'];
 
+	protected $dates = ['tanggal_lahir'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -41,10 +42,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('App\Photo');
 	}
 
-	public function likes() {
+	public function doLikes() {
 		return $this->hasMany('App\Like');
 	}
 
-
+	public function likes() {
+		return $this->belongsToMany('App\Photo', 'likes');
+	}
 
 }

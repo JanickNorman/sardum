@@ -10,7 +10,6 @@
 						<i class="fa fa-twitter"></i>Sign up with Twitter
 					</button>
 				</div>
-			
 			@else
 				<h2>SARDUMOMENT</h2>
 				<h5>Upload Fotomu Bersama sari gandum</h5>
@@ -22,28 +21,20 @@
 					</span>
 					Upload Foto mu sekarang!
 				</a>
-				<div class="row">
-					<form action="photo/upload" method="post">
-						<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-						<label class="control-label">Select File</label>
-						<input id="input-1" name="photo" type="file" class="file">
-						<input type="submit">
-					</form>
-				</div>
 			@endif
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="btn-group" role="group" aria-label="...">
+			<div class="btn-group" role="group">
 				<button type="button" class="btn btn-default">Gallery</button>
 				<button type="button" class="btn btn-default">Mekanisme</button>
 				<button type="button" class="btn btn-default">Syarat & Ketentuan</button>
 			</div>
-			@if(\Auth::check())
+			@if(Auth::check())
 				<div class="btn-group pull-right" role="group" aria-label="...">
-					<img src="tes.jpg" alt="..." class="img">
-					<button type="button pull-right" class="btn btn-default">Anwar</button>
+					<img src="{{Auth::user()->avatar}}" alt="..." class="img">
+					<button type="button pull-right" class="btn btn-default">{{Auth::user()->nama}}</button>
 				</div>
 			@endif
 			<div class="span"></div>

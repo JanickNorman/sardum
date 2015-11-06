@@ -9,37 +9,20 @@
 		<h5>Lihat foto Sardumoment, menangkan berlian beserta isi dunia!</h5>
 <!-- Projects Row -->
         <div class="row">
-        	@foreach( range(1, 9) as $a )
+        	@foreach( $data['photos'] as $photo )
 	            <div class="col-md-4 portfolio-item">
-	                <a href="#">
-	                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+	                <a href="{{route('show.photo', [$photo['id']])}}">
+	                    <img class="img-responsive" width="200" src="{{ $photo['image'] }}" alt="">
 	                </a>
 	                <h5 class="text-center">
-	                    <a href="#">John Jackson</a>
+	                    <a href="#">{{$photo['uploader']['nama']}}</a>
 	                </h5>
 	            </div>
         	@endforeach
+        </div>
+        <div class="row">		
 			<nav class="text-center">
-				<ul class="pagination">
-				    <li>
-				      <a href="#" aria-label="Previous">
-				        <span aria-hidden="true">&laquo;</span>
-				        <span class="sr-only">Previous</span>
-				      </a>
-				    </li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li>
-				      <a href="#" aria-label="Next">
-				        <span aria-hidden="true">&raquo;</span>
-				        <span class="sr-only">Next</span>
-				      </a>
-				    </li>
-				    				
-				</ul>
+				{!! $data['photos']->render()!!}
 			</nav>
         </div>
 	</div>

@@ -10,6 +10,8 @@ use \App\User;
 use \Form as Form;
 use \Auth as Auth;
 use \Session as Session;
+use \Carbon\Carbon;
+use \Validator as Validator;
 
 use App\AuthenticateUser;
 use Illuminate\Http\Request;
@@ -41,7 +43,7 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-}
+	}
 	
 
 	public function loginTwitter() {
@@ -49,59 +51,104 @@ class AuthController extends Controller {
 	}
 
 	public function callbackTwitter() {
-
 		try {
 			$user = Socialize::driver('twitter')->user();
+
+			$existingUser = User::where('provider_type', 'tw')->where('provider_id', (string) $user->id)->first();
+
+			if ($existingUser) {
+				$this->auth->login($existingUser);
+				return redirect('/')->withSuccess('hello' . Auth::user()->nama);
+			}
 
 			//tambah data rekomendasi di default form nya
 			Session::put(['nama' => $user->name,
 					'provider_type' => 'tw',
 					'provider_id' => $user->id,
-					'avatar' => $user->avatar]);
+					'avatar' => $user->avatar
+					]);
 
-			return redirect()->route('get.register');	
+			return redirect()->route('get.register');
 		} catch (\Exception $e) {
-			return redirect('/')->route('home');
+			return redirect('/');
 		}
 	}
 
-	/*
-	*
-	* DateHelper logic dari form datenya, supaya ngga ada 31 February
-	*
-	*/
-	public function getRegister(DateHelper $dateHelper) {
-		return view('register');
+	public function getRegister() {
+		$date['days'] = $this->generateDays();
+		$date['months'] = $this->generateMonths();
+		$date['years'] = $this->generateYears();
+
+		return view('register')->withDate($date);
 	}
 
 
 	public function postRegister(Request $request) {
-		$input = $request->except('_token');
+		$inputs = $request->except('_token');
+		$inputs['provider_id'] = Session::has('provider_id') ? Session::get('provider_id') : NULL;
+		$inputs['provider_type'] = Session::has('provider_type') ? Session::get('provider_type') : NULL;
+		$inputs['avatar'] = Session::has('avatar') ? Session::get('avatar') : NULL;
+		$inputs['tanggal_lahir'] = Carbon::create($inputs['year'], $inputs['month'], $inputs['day'], 0)->toDateString();
 
-		if (Session::has('provider_id') && Session::has('provider_type') && Session::has('avatar')) {
-			
-			$data = [
-				'provider_type' => Session::get('provider_type'),
-				'provider_id' => Session::get('provider_id'),
-				'nama' => $input['nama'],
-				'avatar' => Session::get('avatar'),
-				'email' => $input['email'],
-				'tanggal_lahir' => $input['tanggal_lahir']['day'],
-				'alamat' => $input['alamat'],
-				'nomer_handphone' => $input['nomer_handphone']
-			];
-			$validator = $this->registrar->validator($data);
-			if (!$validator->fails()) {
 
-				return redirect()->route('home');
-			}
-			$user = $this->registrar->create($data);
-			Auth::login($user);
+		$validator = Validator::make($inputs, [
+			'nama' => 'required|max:255',
+			'provider_type' => 'in:tw,fb|required',
+			'provider_id' => 'required|unique_with:users,provider_type',
+			'email' => 'required|email|max:255',
+			'day' => 'required|min:1|max:31',
+			'month' => 'required|min:1|max:12',
+			'year' => 'required|max:2015',
+			'alamat' => 'required',
+			'nomer_handphone' => 'required'
+		]);
 
-			return redirect('/');
+		if ($validator->fails()) {
+			return redirect()->back()->withErrors($validator);
 		}
 
-		return redirect()->route('get.register')->withMessage('please choose login provider');
+		$user = User::create([
+			'nama' => $inputs['nama'],
+			'provider_type' => $inputs['provider_type'],
+			'provider_id' => $inputs['provider_id'],
+			'avatar' => $inputs['avatar'],
+			'tanggal_lahir' => $tanggal_lahir,
+			'alamat' => $inputs['alamat'],
+			'nomer_handphone' => $inputs['nomer_handphone'],
+			'email' => $inputs['email']
+			]);
+
+		Auth::login($user);
+
+		return redirect('/')->withSuccess('Welcome');
 	}
+
+	private function generateDays() {
+		$temp[0] = "days";
+		foreach(range(1, 31) as $n) {
+			$temp[$n] = $n;
+		}
+		return $temp;
+	}
+	private function generateMonths() {
+		$months[0] = "months";
+		for($m=1; $m<=12; ++$m){
+		    $months[$m] = date('F', mktime(0, 0, 0, $m, 1));
+		};
+		return $months;
+	}
+	private function generateYears() {
+		$temp[0] = "years";
+		foreach(range(2015, 1900) as $year) {
+			$temp[$year] = $year;
+		}
+		return $temp;
+	}
+
+
+
+
+
+
 
 }
