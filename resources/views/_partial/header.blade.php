@@ -3,7 +3,7 @@
 		<div class="container text-center">
 			@if (Auth::guest())
 				<h2>Register dengan social media</h2>
-					<button class="btn btn-block btn-social btn-facebook">
+					<button onclick="window.location='/login/facebook';" class="btn btn-block btn-social btn-facebook">
 						<i class="fa fa-facebook"></i>Sign up with Facebook
 					</button>
 					<button onclick="window.location='/login/twitter';" class="btn btn-block btn-social btn-twitter">
@@ -17,7 +17,7 @@
 				<br>
 				<br>
 				<a href="#" class="btn btn-primary btn-lg">
-					<span class="glyphicon glyphicon-upload"> 
+					<span class="glyphicon glyphicon-upload">
 					</span>
 					Upload Foto mu sekarang!
 				</a>

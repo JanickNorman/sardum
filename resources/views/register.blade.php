@@ -13,18 +13,21 @@
 		<h6>Isi data dirimu dengan lengkap dan jelas</h6>
 		<form action="/register" method="post">
 			<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+			<input type="hidden" name="provider_id" value="{{ $data['provider_id'] }}">
+			<input type="hidden" name="provider_type" value="{{ $data['provider_type'] }}">
+			<input type="hidden" nama="avatar" value="{{ $data['avatar'] }}">
 			<div class="row">
 				<div class="col-md-6">
 					<label for="nama">Nama</label><br>
-					@if (Session::has('nama'))
-						<input style="width: 100%" name="nama" value="{{Session::get('nama')}}">
+					@if (isset($data['nama']))
+						<input style="width: 100%" name="nama" value="{{$data['nama']}}">
 					@else
-						<input id="nama" name="nama" style="width: 100%" type="text">				
+						<input id="nama" name="nama" style="width: 100%" type="text">
 					@endif
 				</div>
 				<div class="col-md-6">
 					<label for="email">Email</label><br>
-					<input id="email" name="email" style="width: 100%" type="email">
+					<input id="email" name="email" style="width: 100%" type="email" value="{{(isset($data['email']) ? $data['email'] : '')}}">
 				</div>
 			</div>
 			<div class="row">
@@ -53,7 +56,7 @@
 						        }
 						    ?>
 						</select>
-					</div>	
+					</div>
 				</div>
 				<div class="col-md-6">
 					<label for="nomer_handphone">Nomer Handphone</label><br>
@@ -63,10 +66,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<label for="alamat">Alamat</label><br>
-					<input id="alamat" name="alamat" style="width: 100%; height: 75px" type="text">				
+					<input id="alamat" name="alamat" style="width: 100%; height: 75px" type="text">
 				</div>
 			</div>
-			<h6>*all mandatory</h6>			
+			<h6>*all mandatory</h6>
 			<input class="btn btn-large" type="submit">
 			<br>
 			<h6>By clicking this button, you agree to terms & conditions</h6>

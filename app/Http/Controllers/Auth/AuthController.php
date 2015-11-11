@@ -44,78 +44,109 @@ class AuthController extends Controller {
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 	}
-	
 
-	public function loginTwitter() {
-		return Socialize::driver('twitter')->redirect();
+	public function loginSocial($provider) {
+		if (!$provider) return redirect('/');
+
+		return Socialize::driver($provider)->redirect();
 	}
 
-	public function callbackTwitter() {
-		try {
-			$user = Socialize::driver('twitter')->user();
+	public function callbackSocial($provider) {
 
-			$existingUser = User::where('provider_type', 'tw')->where('provider_id', (string) $user->id)->first();
+		$user = Socialize::driver($provider)->user();
 
-			if ($existingUser) {
-				$this->auth->login($existingUser);
-				return redirect('/')->withSuccess('hello' . Auth::user()->nama);
-			}
+		//kalo ada langsung login
+		$existingUser = User::where('provider_type', $this->getProviderType($provider))->where('provider_id', (string) $user->id)->first();
 
-			//tambah data rekomendasi di default form nya
-			Session::put(['nama' => $user->name,
-					'provider_type' => 'tw',
-					'provider_id' => $user->id,
-					'avatar' => $user->avatar
-					]);
+		if ($existingUser) {
+			$this->auth->login($existingUser);
+			return redirect('/')->withSuccess('hello', $this->auth->user()->nama);
+		}
 
-			return redirect()->route('get.register');
-		} catch (\Exception $e) {
-			return redirect('/');
+		$data = [
+			'nama' => $user->name,
+			'provider_type' => $this->getProviderType($provider),
+			'provider_id' => $user->id,
+			'avatar' => isset($user->avatar) ? $user->avatar : " ",
+			'email' => isset($user->email) ? $user->email : " "
+		];
+		Session::put('dataUser', $data);
+
+		return redirect()->route('get.register');
+
+	}
+
+	private function getProviderType($provider) {
+		if ($provider == 'twitter') {
+			return 'tw';
+		}else if ($provider == 'facebook') {
+			return 'fb';
+		}else {
+			return false;
 		}
 	}
 
 	public function getRegister() {
-		$date['days'] = $this->generateDays();
-		$date['months'] = $this->generateMonths();
-		$date['years'] = $this->generateYears();
+		$data = Session::get('dataUser');
+		if (!$data) return redirect('/');
 
-		return view('register')->withDate($date);
+
+		$tanggal['days'] = $this->generateDays();
+		$tanggal['months'] = $this->generateMonths();
+		$tanggal['years'] = $this->generateYears();
+
+		return view('register')->with('date', $tanggal)->with('data', $data);
 	}
 
 
 	public function postRegister(Request $request) {
-		$inputs = $request->except('_token');
-		$inputs['provider_id'] = Session::has('provider_id') ? Session::get('provider_id') : NULL;
-		$inputs['provider_type'] = Session::has('provider_type') ? Session::get('provider_type') : NULL;
-		$inputs['avatar'] = Session::has('avatar') ? Session::get('avatar') : NULL;
-		$inputs['tanggal_lahir'] = Carbon::create($inputs['year'], $inputs['month'], $inputs['day'], 0)->toDateString();
 
+		//dd($request['provider_id'] != Session::get('dataUser.provider_id'), $request['provider_type'], Session::get('dataUser.provider_type'));
+		dd($request);
+		//cek sama session supaya nolak kalo provider_id dan provider_typenya diutak-atik
+		if ($request['provider_id'] != Session::get('dataUser.provider_id') && $request['provider_type'] != Session::get('dataUser.provider_type')) return redirect('/register');
 
-		$validator = Validator::make($inputs, [
+		//quick test
+		//$v = Validator::make(['date' => '2009-2-22'], ['date' => 'date_format:"Y-m-d"']);
+		//var_dump( $v->passes() );
+
+		//validasi dan bikin tanggal lahir
+		$validasiTanggal = Validator::make($request->only(['day', 'month', 'year']), [
+			'day' => 'required|digits_between:1,31',
+			'month' => 'required|digits_between:1,12',
+			'year' => 'required|integer|min:1900'
+		]);
+
+		if ($validasiTanggal->fails()) {
+			return redirect('/register')->back()->withErrors($validasiTanggal);
+		}
+
+		$request['tanggal_lahir'] = Carbon::create($request['year'], $request['month'], $request['day'], 0)->toDateString();
+
+		//$request['tanggal_lahir'] = '11/11/2004';
+		$validator = Validator::make($request->except('_token'), [
 			'nama' => 'required|max:255',
 			'provider_type' => 'in:tw,fb|required',
 			'provider_id' => 'required|unique_with:users,provider_type',
-			'email' => 'required|email|max:255',
-			'day' => 'required|min:1|max:31',
-			'month' => 'required|min:1|max:12',
-			'year' => 'required|max:2015',
+			'tanggal_lahir' => 'date_format:"Y-m-d"',
 			'alamat' => 'required',
-			'nomer_handphone' => 'required'
 		]);
+
+		dd($request->all());
 
 		if ($validator->fails()) {
 			return redirect()->back()->withErrors($validator);
 		}
 
 		$user = User::create([
-			'nama' => $inputs['nama'],
-			'provider_type' => $inputs['provider_type'],
-			'provider_id' => $inputs['provider_id'],
-			'avatar' => $inputs['avatar'],
-			'tanggal_lahir' => $tanggal_lahir,
-			'alamat' => $inputs['alamat'],
-			'nomer_handphone' => $inputs['nomer_handphone'],
-			'email' => $inputs['email']
+			'nama' => $request['nama'],
+			'provider_type' => $request['provider_type'],
+			'provider_id' => $request['provider_id'],
+			'avatar' => $request['avatar'],
+			'tanggal_lahir' => $request['tanggal_lahir'],
+			'alamat' => $request['alamat'],
+			'nomer_handphone' => $request['nomer_handphone'],
+			'email' => $request['email']
 			]);
 
 		Auth::login($user);

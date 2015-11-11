@@ -10,12 +10,11 @@ use \Input as Input;
 class SiteController extends Controller {
 
 	public function __construct() {
-		
+
 	}
 
 	public function index() {
-		$data['photos'] = Photo::paginate(3); 
-
+		$data['photos'] = Photo::paginate(3);
 		return view('index')->with('data', $data);
 	}
 

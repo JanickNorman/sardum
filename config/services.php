@@ -37,7 +37,13 @@ return [
 	'twitter' => [
 		'client_id' => 'RndUCaygvI0zETsWqEpLteglT',
 		'client_secret' => 'BWJ2nxUZS0gRS4mBmE9DClXRcW3n9fL4jajw48o15r917z7zyT',
-		'redirect' => 'http://sardumoment.dev:8000/callback/twitter',
+		'redirect' => 'http://sardumoment.dev:8000/login/callback/twitter',
 	],
+
+    	'facebook' => [
+        		'client_id'     => '1480239428950882',
+        		'client_secret' => '384826c234173d00e66bd89e9441a806',
+        		'redirect'      => 'http://sardumoment.dev:8000/login/callback/facebook',
+    ],
 
 ];

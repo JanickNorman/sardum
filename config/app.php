@@ -197,7 +197,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Socialize'	=> 'Laravel\Socialite\Facades\Socialite',
-		'HTML' 		=> 'Illuminate\Html\HtmlFacade',
+		'HTML' 	=> 'Illuminate\Html\HtmlFacade',
 		'Form'		=>	'Illuminate\Html\FormFacade',
 	],
 

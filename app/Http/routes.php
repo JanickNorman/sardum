@@ -11,11 +11,26 @@
 |
 */
 
-Route::get('login/twitter', [
-	'as' => 'login.twitter',
-	'uses' =>'Auth\AuthController@loginTwitter'
+
+Route::bind('provider', function($provider) {
+	if ($provider == 'facebook') {
+		return 'facebook';
+	} elseif ($provider == 'twitter') {
+		return 'twitter';
+	} else {
+		return false;
+	}
+});
+Route::get('login/{provider}', [
+	'as' => 'login.social',
+	'uses' =>'Auth\AuthController@loginSocial',
 	]);
-Route::get('callback/twitter', 'Auth\AuthController@callbackTwitter');
+Route::get('login/callback/{provider}', [
+	'as' => 'callback.social',
+	'uses' => 'Auth\AuthController@callbackSocial',
+	]);
+
+
 Route::get('/register', [
 	'as' => 'get.register',
 	'uses' => 'Auth\AuthController@getRegister']);
